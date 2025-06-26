@@ -1,0 +1,8 @@
+SELECT 
+    COALESCE(b.brand, 'Без бренда') AS brand_name,
+    SUM(a.qty * a.price) AS total_supply_amount
+FROM actions a
+JOIN products p ON a.product_id = p.id
+LEFT JOIN brands b ON p.brand_id = b.id
+GROUP BY b.brand
+ORDER BY brand_name;
