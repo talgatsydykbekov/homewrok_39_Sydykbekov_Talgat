@@ -1,0 +1,9 @@
+SELECT c.category,YEAR(a.action_date) AS year,
+    SUM(a.qty * a.price) / SUM(a.qty) AS avg_price,
+    MAX(a.price) AS max_price,
+    MIN(a.price) AS min_price
+FROM actions a
+JOIN products p ON a.product_id = p.id
+JOIN categories c ON p.category_id = c.id
+GROUP BY c.category, YEAR(a.action_date)
+ORDER BY c.category, year;
